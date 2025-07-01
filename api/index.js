@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const ducksRouter = require("./ducks");
+const studentsRouter = require("./students");
 
-router.use("/ducks", ducksRouter);
+router.use("/students", studentsRouter);
 
 module.exports = router;
