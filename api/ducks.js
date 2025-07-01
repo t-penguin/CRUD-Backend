@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { Duck } = require("../database");
+const { Student } = require("../database"); //for handling requests related to students
 
-// GET all ducks
+// students
 router.get("/", async (req, res) => {
   res.sendStatus(501);
 });
