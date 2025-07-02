@@ -19,6 +19,10 @@ router.get("/:id", async (req, res) => {
   try {
     const studentID = Number(req.params.id);
     const student = await Student.findByPk(studentID);
+    if (student === null) {
+      res.sendStatus(404);
+      return;
+    }
     res.send(student);
     res.sendStatus(200);
   } catch (err) {
@@ -44,6 +48,10 @@ router.delete("/:id", async (req, res) => {
   try {
     const studentID = Number(req.params.id);
     const student = await Student.findByPk(studentID);
+    if (student === null) {
+      res.sendStatus(404);
+      return;
+    }
     await student.destroy();
     res.sendStatus(200);
   } catch (err) {
