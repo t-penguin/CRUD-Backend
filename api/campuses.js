@@ -45,6 +45,27 @@ router.post("/", async (req, res) => {
   }
 });
 
+// PUT campus by ID
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedInfo = req.body;
+    const campusID = Number(req.params.id);
+    const campus = await Campus.findByPk(campusID);
+    if (campus === null)
+      return res.sendStatus(404);
+
+    campus.name = updatedInfo.name;
+    campus.address = updatedInfo.address;
+    campus.imageUrl = updatedInfo.imageUrl;
+    campus.description = updatedInfo.description;
+    campus.save();
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
 // DELETE campus by ID
 router.delete("/:id", async (req, res) => {
   try {

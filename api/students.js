@@ -46,6 +46,29 @@ router.post("/", async (req, res) => {
   }
 });
 
+// PUT student by ID
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedInfo = req.body;
+    const studentID = Number(req.params.id);
+    const student = await Student.findByPk(studentID);
+    if (student === null)
+      return res.sendStatus(404);
+
+    student.firstName = updatedInfo.firstName;
+    student.lastName = updatedInfo.lastName;
+    student.email = updatedInfo.email;
+    student.imageUrl = updatedInfo.imageUrl;
+    student.gpa = updatedInfo.gpa;
+    student.campusId = updatedInfo.campusId;
+    student.save();
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
 // DELETE student by ID
 router.delete("/:id", async (req, res) => {
   try {
