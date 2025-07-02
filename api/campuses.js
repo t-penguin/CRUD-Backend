@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // POST new campuses
-router.get("/", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const campus = req.body;
     await Campus.create(campus);
@@ -41,13 +41,13 @@ router.get("/", async (req, res) => {
 });
 
 // DELETE campus by ID
-router.get("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const campusID = Number(req.params.id);
     const campus = await Campus.findByPk(campusID);
     if (campus === null) 
       return res.sendStatus(404);
-    
+
     await campus.destroy();
     res.sendStatus(200);
   } catch (err) {
