@@ -1,28 +1,29 @@
-const express = require("express");
-const { Sequelize, DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("./db");
-const { toDefaultValue } = require("sequelize/lib/utils");
 
 const Campus = db.define("campus", {
-  Name: {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-
-  imageURL: {
-    type: DataTypes.BLOB,
-    defaultValue:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.highereddive.com%2Fnews%2Fharvard-university-rejects-trump-demands%2F745331%2F&psig=AOvVaw2pnishPOzpbZ0_yp8Xhz43&ust=1751519725413000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPC2v8y1nY4DFQAAAAAdAAAAABAM",
-    allowNull: false,
+  imageUrl: {
+    type: DataTypes.STRING,
+    defaultValue: "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+    validate: { isUrl: true },
   },
-
   address: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-
   description: {
     type: DataTypes.TEXT,
+    allowNull: false,
   },
 });
+
 module.exports = Campus;
