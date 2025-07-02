@@ -13,7 +13,7 @@ const Campus = db.define("campus", {
   },
   imageUrl: {
     type: DataTypes.STRING,
-    defaultValue: "https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg",
+    defaultValue: "https://render.fineartamerica.com/images/rendered/medium/print/8/5.5/break/images/artworkimages/medium/1/indiana-university-sample-gates-university-icons.jpg",
     validate: { isUrl: true },
   },
   address: {
