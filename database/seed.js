@@ -50,7 +50,7 @@ const seed = async () => {
   console.log(`👨‍🎓👩‍🎓 Created ${students.length} students`);
   console.log(`🏫 Created ${campuses.length} campuses`);
   console.log("🌱 Seeded the database");
-  db.close();
+  await db.close();
 };
 
 seed();
