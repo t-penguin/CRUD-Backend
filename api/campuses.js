@@ -6,8 +6,7 @@ const { Campus } = require("../database");
 router.get("/", async (req, res) => {
   try {
     const campuses = await Campus.findAll();
-    res.send(campuses);
-    res.sendStatus(200);
+    res.status(200).send(campuses);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
@@ -19,12 +18,10 @@ router.get("/:id", async (req, res) => {
   try {
     const campusID = Number(req.params.id);
     const campus = await Campus.findByPk(campusID);
-    if (campus === null) {
-      res.sendStatus(404);
-      return;
-    }
-    res.send(campus);
-    res.sendStatus(200);
+    if (campus === null)
+      return res.sendStatus(404);;
+
+    res.status(200).send(campus);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
@@ -48,10 +45,9 @@ router.get("/:id", async (req, res) => {
   try {
     const campusID = Number(req.params.id);
     const campus = await Campus.findByPk(campusID);
-    if (campus === null) {
-      res.sendStatus(404);
-      return;
-    }
+    if (campus === null) 
+      return res.sendStatus(404);
+    
     await campus.destroy();
     res.sendStatus(200);
   } catch (err) {
