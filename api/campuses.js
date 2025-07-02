@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Campus } = require("../database");
+const { Campus, Student } = require("../database");
 
 // GET all campuses
 router.get("/", async (req, res) => {
@@ -19,9 +19,14 @@ router.get("/:id", async (req, res) => {
     const campusID = Number(req.params.id);
     const campus = await Campus.findByPk(campusID);
     if (campus === null)
-      return res.sendStatus(404);;
+      return res.sendStatus(404);
 
-    res.status(200).send(campus);
+    const students = await Student.findAll({where: {campusId: campusID}});
+    const campusDetails = {
+      campus: campus,
+      students: students,
+    }
+    res.status(200).send(campusDetails);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
