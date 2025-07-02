@@ -7,7 +7,8 @@ const seed = async () => {
 
   const campuses = await Campus.bulkCreate([
     { 
-      name: "Borough of Manhattan Community College", 
+      name: "Borough of Manhattan Community College",
+      address: "199 Chambers Street",
       description: "Borough of Manhattan Community College (BMCC) is a " +
       "large community college in New York City, part of the City University " +
       "of New York (CUNY) system. It's known for its diverse student body, " +
