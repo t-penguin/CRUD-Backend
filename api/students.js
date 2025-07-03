@@ -17,17 +17,11 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const studentID = Number(req.params.id);
-    const student = await Student.findByPk(studentID);
+    const student = await Student.findByPk(studentID, { include: Campus });
     if (student === null)
       return res.sendStatus(404);
-
-    const campus = await Campus.findByPk(student.campusId);
-    const studentDetails = {
-      student: student,
-      campus: campus,
-    }
     
-    res.status(200).send(studentDetails);
+    res.status(200).send(student);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
