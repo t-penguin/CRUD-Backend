@@ -20,12 +20,21 @@ router.get("/", async (req, res) => {
 
 // GET campus by ID
 router.get("/id", async (req, res) => {
-  const userId = req.params.id; //Acess the primary key from the user URL
+  //Acess the primary key from the user URL
   try {
-    const ID = await Campus.findByPk(id); //find a entry from a table using provied key
-    if()
-  } catch (error) {
-    console.log("error has accrued");
+    const campausID = Number(req.params.id); //Acess the primary key from the user URL
+    const campus = await Campus.findByPk(campausID); //find a entry from a table using provied key
+    if (campus === null); //if it null no campus with that id exists
+    return res.sendStatus(404); //send a 404 not found response
+    const students = await Student.findAll({where: {campusId: campusID}});
+  const campusDetails = {
+    campus:campus,
+    students:students,
+  }
+   res.status(200).(campusDetails);
+
+  }catch (error) {
+    console.log(err);
   }
 });
 
