@@ -50,3 +50,16 @@ router.post("/", async (req, res) => {
 // PUT campus by ID
 
 // DELETE campus by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const campausID = Number(req.params.id); //Acess the primary key from the user URL
+    const campus = await Campus.findByPk(campausID); //find a entry from a table using provied key
+    if (campus === null); //if it null no campus with that id exists
+    return res.sendStatus(404); //send a 404 not found response
+
+    await campus.destroy();
+    res.status(200).send(campusDetails);
+  } catch (error) {
+    console.log(err);
+  }
+});
