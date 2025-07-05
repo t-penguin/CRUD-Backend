@@ -26,26 +26,27 @@ router.get("/id", async (req, res) => {
     const campus = await Campus.findByPk(campausID); //find a entry from a table using provied key
     if (campus === null); //if it null no campus with that id exists
     return res.sendStatus(404); //send a 404 not found response
-    const students = await Student.findAll({where: {campusId: campusID}});
-  const campusDetails = {
-    campus:campus,
-    students:students,
-  }
-   res.status(200).(campusDetails);
-
-  }catch (error) {
+    const students = await Student.findAll({ where: { campusId: campusID } });
+    const campusDetails = {
+      campus: campus,
+      students: students,
+    };
+    res.status(200).send(campusDetails);
+  } catch (error) {
     console.log(err);
   }
 });
 
 // POST new campuses
-router.post("/",async (req,res)=> {
-try{
-  const post = req.body;
-  await campus.create(campus);
-
-}
-})
+router.post("/", async (req, res) => {
+  try {
+    const post = req.body;
+    await campus.create(campus);
+    res.status(201);
+  } catch (err) {
+    console.log(err);
+  }
+});
 // PUT campus by ID
 
 // DELETE campus by ID
