@@ -39,7 +39,13 @@ router.get("/id", async (req, res) => {
 });
 
 // POST new campuses
+router.post("/",async (req,res)=> {
+try{
+  const post = req.body;
+  await campus.create(campus);
 
+}
+})
 // PUT campus by ID
 
 // DELETE campus by ID
