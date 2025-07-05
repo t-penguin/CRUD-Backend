@@ -37,6 +37,7 @@ const Student = db.define("student", {
 
   email: {
     type: DataTypes.STRING,
+    unique: true,
     validate: {
       isEmail: true,
     },
