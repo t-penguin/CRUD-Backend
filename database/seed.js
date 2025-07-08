@@ -1,10 +1,23 @@
 const db = require("./db");
+const { Duck, User } = require("./index");
 const { Student, Campus } = require("./index");
 
 const seed = async () => {
   db.logging = false;
   await db.sync({ force: true }); // Drop and recreate tables
 
+  const users = await User.bulkCreate([
+    { username: "admin", passwordHash: User.hashPassword("password") },
+    { username: "user1", passwordHash: User.hashPassword("password") },
+    { username: "user2", passwordHash: User.hashPassword("password") },
+  ]);
+
+  const ducks = await Duck.bulkCreate([
+    { name: "James Pond" },
+    { name: "Quakie Chan" },
+    { name: "Goose" },
+  ]);
+  
   const campuses = await Campus.bulkCreate([
     { 
       name: "Borough of Manhattan Community College",
@@ -26,9 +39,9 @@ const seed = async () => {
       gpa: 4.0,
     },
     { 
-      firstName: "Phone", 
-      lastName: "Swa",
-      email: "phone@example.com",
+      firstName: "Deborah", 
+      lastName: "Agosto",
+      email: "@example.com",
       gpa: 4.0,
     },
     { 
